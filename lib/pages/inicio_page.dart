@@ -1,66 +1,8 @@
-import '../data/clinicas.dart';
-import '../models/clinica.dart';
-import '../services/maps_service.dart';
-import '../services/ubicacion_service.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-class ResultadoClinicaCard extends StatelessWidget {
-  final String nombre;
-  final String direccion;
-  final String distancia;
-  final VoidCallback onMaps;
-  final VoidCallback onWaze;
-  final VoidCallback onProbar;
-
-  const ResultadoClinicaCard({
-    super.key,
-    required this.nombre,
-    required this.direccion,
-    required this.distancia,
-    required this.onMaps,
-    required this.onWaze,
-    required this.onProbar,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(top: 20),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Text(
-              nombre,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(direccion),
-            const SizedBox(height: 10),
-            Text(distancia),
-            const SizedBox(height: 10),
-
-            ElevatedButton.icon(
-              onPressed: onMaps,
-              icon: const Icon(Icons.map),
-              label: const Text('Ir con Google Maps'),
-            ),
-
-            ElevatedButton(
-              onPressed: onProbar,
-              child: const Text('Probar clínicas'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+import 'package:geolocator/geolocator.dart'; 
+import 'package:url_launcher/url_launcher.dart'; 
+import '../data/clinicas.dart'; 
+import '../models/clinica.dart';
 
 class InicioPage extends StatefulWidget {
   const InicioPage({super.key});
@@ -76,24 +18,16 @@ class _InicioPageState extends State<InicioPage> {
   double? latitudUsuario;
   double? longitudUsuario;
 
-  List<Clinica> clinicasOrdenadas = [];
-
-  String nombreClinica = "";
-  String direccionClinica = "";
-  String distanciaClinica = "";
-
   double? latitudClinica;
   double? longitudClinica;
 
+  List<Clinica> clinicasOrdenadas = [];
+
   Future<void> buscarClinicas() async {
 
-  Position? posicion =
-      await UbicacionService.obtenerUbicacion();
+  await obtenerUbicacion();
 
-  if (posicion == null) return;
-
-  latitudUsuario = posicion.latitude;
-  longitudUsuario = posicion.longitude;
+  if (latitudUsuario == null || longitudUsuario == null) return;
 
   List<Clinica> clinicasFiltradas = clinicas
       .where((c) => c.seguro.contains(seguroSeleccionado!))
@@ -118,9 +52,47 @@ class _InicioPageState extends State<InicioPage> {
     return distanciaA.compareTo(distanciaB);
   });
 
+  clinicasFiltradas.removeWhere((clinica) {
+
+  double distancia = Geolocator.distanceBetween(
+    latitudUsuario!,
+    longitudUsuario!,
+    clinica.latitud,
+    clinica.longitud,
+  );
+
+  return distancia > 10000; // más de 10 km
+});
+
+if (clinicasFiltradas.isEmpty) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+      content: Text(
+        'No se encontraron clínicas a menos de 10 km',
+      ),
+    ),
+  );
+  return;
+}
+
   setState(() {
     clinicasOrdenadas = clinicasFiltradas;
   });
+}
+
+Future<void> abrirGoogleMaps(
+  double latitud,
+  double longitud,
+) async {
+
+  final Uri url = Uri.parse(
+    'https://www.google.com/maps/search/?api=1&query=$latitud,$longitud',
+  );
+
+  await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  );
 }
 
 Future<void> abrirWaze(
@@ -187,10 +159,36 @@ Future<void> abrirWaze(
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SOAT Cercano'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
+  title: const Text('SOAT Cercano'),
+  actions: [
+    PopupMenuButton<String>(
+      onSelected: (value) async {
+        if (value == 'comentarios') {
+          final Uri email = Uri(
+            scheme: 'mailto',
+            path: 'antonbejarano.richard.b36.ivcd@gmail.com',
+            query:
+                'subject=Comentarios sobre SOAT Cercano',
+          );
+
+          await launchUrl(email);
+        }
+      },
+      itemBuilder: (context) => [
+        const PopupMenuItem(
+          value: 'comentarios',
+          child: Text('Enviar comentarios'),
+        ),
+      ],
+    ),
+  ],
+),
+      
+      body: Stack(
+  children: [
+    SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 60),
         child: Column(
           children: [
             const SizedBox(height: 20),
@@ -250,106 +248,104 @@ ElevatedButton(
 
 const SizedBox(height: 20),
 
-//Text(
-//  ubicacion,
-//  textAlign: TextAlign.center,
-//),
-//const SizedBox(height: 20),
-
 if (clinicasOrdenadas.isNotEmpty)
-  SizedBox(
-    height: 1000,
-    child: ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: clinicasOrdenadas.length,
-      itemBuilder: (context, index) {
+SizedBox(
+  height: 310,
+  child: ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: clinicasOrdenadas.length,
+    itemBuilder: (context, index) {
 
-        final clinica = clinicasOrdenadas[index];
+      final clinica = clinicasOrdenadas[index];
 
-        double distancia = Geolocator.distanceBetween(
-          latitudUsuario!,
-          longitudUsuario!,
-          clinica.latitud,
-          clinica.longitud,
-        );
+      double distancia = Geolocator.distanceBetween(
+        latitudUsuario!,
+        longitudUsuario!,
+        clinica.latitud,
+        clinica.longitud,
+      );
 
-        return SizedBox(
-          width: 320,
-          child: Card(
-            margin: const EdgeInsets.all(10),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
+      return SizedBox(
+        width: 350,
+        child: Card(
+          margin: const EdgeInsets.all(10),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
 
-                  Text(
-                    clinica.nombre,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Text(
+                  clinica.nombre,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
+                ),
 
-                  const SizedBox(height: 10),
+                const SizedBox(height: 10),
 
-                  Text(clinica.direccion),
+                Text(clinica.direccion),
 
-                  const SizedBox(height: 10),
+                const SizedBox(height: 10),
 
-                  Text(
-                    "${(distancia / 1000).toStringAsFixed(2)} km",
-                  ),
+                Text(
+                  "${(distancia / 1000).toStringAsFixed(2)} km",
+                  style: const TextStyle(fontSize: 18),
+                ),
 
-                  const SizedBox(height: 20),
+                const SizedBox(height: 20),
+
+                ElevatedButton.icon(
+                  onPressed: () {
+                    abrirGoogleMaps(
+                      clinica.latitud,
+                      clinica.longitud,
+                    );
+                  },
+                  icon: const Icon(Icons.map),
+                  label: const Text("Ir con Google Maps"),
+                ),
+                const SizedBox(height: 10),
 
                   ElevatedButton.icon(
-                    onPressed: () {
-                      MapsService.abrirGoogleMaps(
-                        clinica.latitud,
-                        clinica.longitud,
-                      );
-                    },
-                    icon: const Icon(Icons.map),
-                    label: const Text("Ir con Google Maps"),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      abrirWaze(
-                        clinica.latitud,
-                        clinica.longitud,
-                      );
-                    },
-                    icon: const Icon(Icons.navigation),
-                    label: const Text("Ir con Waze"),
-                  ),
-                  const SizedBox(height: 10),
-
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        abrirWaze(
-                          clinica.latitud,
-                          clinica.longitud,
-                        );
-                      },
-                      icon: const Icon(Icons.navigation),
-                      label: const Text("Ir con Waze"),
-                    ),
-                ],
-              ),
+                  onPressed: () {
+                    abrirWaze(
+                      clinica.latitud,
+                      clinica.longitud,
+                    );
+                  },
+                  icon: const Icon(Icons.navigation),
+                  label: const Text("Ir con Waze"),
+                ),
+              ],
             ),
           ),
-        );
-      },
-    ),
-  )
-
-
+        ),
+      );
+    },
+  ),
+)
           ],
         ),
       ),
+    ),
+
+    const Positioned(
+      bottom: 10,
+      right: 10,
+      child: Text(
+        'Hecho por Secc. CBP Dominith Anton B36',
+        style: TextStyle(
+          fontSize: 12,
+          color: Colors.grey,
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+    ),
+
+
+  ],
+),
     );
   }
 }
