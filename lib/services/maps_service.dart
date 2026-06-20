@@ -17,7 +17,7 @@ class MapsService {
       throw Exception('No se pudo abrir Google Maps');
     }
   }
-  Future<void> abrirWaze(
+  static Future<void> abrirWaze(
   double latitud,
   double longitud,
 ) async {
