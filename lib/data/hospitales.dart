@@ -1,7 +1,5 @@
 import '../models/hospital.dart';
 
-import '../models/hospital.dart';
-
 final List<Hospital> hospitales = [
 
   Hospital(
@@ -11,8 +9,8 @@ final List<Hospital> hospitales = [
       'ACV',
       'Neurocirugia',
     ],
-    latitud: -12.0459,
-    longitud: -77.0278,
+    latitud: -12.04609164833797, 
+    longitud: -77.0161198932545,
   ),
 
   Hospital(
@@ -23,8 +21,8 @@ final List<Hospital> hospitales = [
       'Cardiaco',
       'Neurocirugia',
     ],
-    latitud: -12.0728,
-    longitud: -77.0503,
+    latitud: -12.079773463458018, 
+    longitud: -77.03884479661866,
   ),
 
   Hospital(
@@ -36,8 +34,8 @@ final List<Hospital> hospitales = [
       'Trauma',
       'Neurocirugia',
     ],
-    latitud: -12.0635,
-    longitud: -77.0284,
+    latitud: -12.059634619199244, 
+    longitud: -77.022071622045,
   ),
 
   Hospital(
@@ -46,8 +44,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'ACV',
     ],
-    latitud: -12.0584,
-    longitud: -77.1258,
+    latitud: -12.06501957129983, 
+    longitud: -77.12206076440793,
   ),
 
   Hospital(
@@ -57,8 +55,8 @@ final List<Hospital> hospitales = [
       'ACV',
       'Trauma',
     ],
-    latitud: -12.1267,
-    longitud: -77.0285,
+    latitud: -12.127982438140942, 
+    longitud: -77.01770500669717,
   ),
 
   Hospital(
@@ -69,8 +67,8 @@ final List<Hospital> hospitales = [
       'Cardiaco',
       'Neurocirugia',
     ],
-    latitud: -12.0227,
-    longitud: -77.0535,
+    latitud: -12.022110016650828, 
+    longitud: -77.05571140856698,
   ),
 
   Hospital(
@@ -82,8 +80,8 @@ final List<Hospital> hospitales = [
       'Quemados',
       'Trauma',
     ],
-    latitud: -12.0581,
-    longitud: -77.0215,
+    latitud: -12.056558533033705, 
+    longitud: -77.01603277786828,
   ),
 
   Hospital(
@@ -103,8 +101,8 @@ final List<Hospital> hospitales = [
       'ACV',
       'Obstetrico',
     ],
-    latitud: -12.1568,
-    longitud: -76.9737,
+    latitud: -12.016040163821904, 
+    longitud: -77.09856306240938,
   ),
 
   Hospital(
@@ -113,8 +111,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'ACV',
     ],
-    latitud: -12.0557,
-    longitud: -77.1142,
+    latitud: -12.062561437031457, 
+    longitud: -77.12358042020195,
   ),
 
   Hospital(
@@ -123,8 +121,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'ACV',
     ],
-    latitud: -12.0373,
-    longitud: -76.9139,
+    latitud: -12.025945019344348, 
+    longitud: -76.91727094904411,
   ),
 
   Hospital(
@@ -133,8 +131,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'ACV',
     ],
-    latitud: -12.0464,
-    longitud: -77.1032,
+    latitud: -12.048715855224778, 
+    longitud: -77.10773564179658,
   ),
 
   Hospital(
@@ -143,8 +141,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Cardiaco',
     ],
-    latitud: -12.0748,
-    longitud: -77.0512,
+    latitud: -12.076834637904298, 
+    longitud: -77.04020047972786,
   ),
 
   Hospital(
@@ -153,8 +151,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Cardiaco',
     ],
-    latitud: -12.0535,
-    longitud: -77.0425,
+    latitud: -12.049537466144958, 
+    longitud: -77.04269480671542,
   ),
 
   Hospital(
@@ -165,8 +163,8 @@ final List<Hospital> hospitales = [
       'Quemados',
       'Pediatrico',
     ],
-    latitud: -12.0884,
-    longitud: -76.9926,
+    latitud: -12.085871252558187, 
+    longitud: -76.99244146253184,
   ),
 
   Hospital(
@@ -175,8 +173,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Cardiaco',
     ],
-    latitud: -12.1108,
-    longitud: -77.0342,
+    latitud: -12.113109600411043, 
+    longitud: -77.03301710856117,
   ),
 
   Hospital(
@@ -185,8 +183,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Cardiaco',
     ],
-    latitud: -12.0976,
-    longitud: -77.0287,
+    latitud: -12.090513558731976, 
+    longitud: -77.01829934540977,
   ),
 
   Hospital(
@@ -195,8 +193,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Cardiaco',
     ],
-    latitud: -12.0540,
-    longitud: -77.0398,
+    latitud: -12.05811377352074, 
+    longitud: -77.03831665089263,
   ),
 
   Hospital(
@@ -206,8 +204,8 @@ final List<Hospital> hospitales = [
       'Cardiaco',
       'Quemados',
     ],
-    latitud: -12.0899,
-    longitud: -76.9716,
+    latitud: -12.100073585760054, 
+    longitud: -76.97135985092717,
   ),
 
   Hospital(
@@ -216,8 +214,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Cardiaco',
     ],
-    latitud: -12.1008,
-    longitud: -77.0394,
+    latitud: -12.108613473875648, 
+    longitud: -77.03955613242573,
   ),
 
   Hospital(
@@ -226,8 +224,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Cardiaco',
     ],
-    latitud: -12.0950,
-    longitud: -77.0582,
+    latitud: -12.098615461051738, 
+    longitud: -77.05145183554542,
   ),
 
   Hospital(
@@ -236,8 +234,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Quemados',
     ],
-    latitud: -12.0675,
-    longitud: -77.0284,
+    latitud: -12.05937210812947, 
+    longitud: -77.02205948776673,
   ),
 
   Hospital(
@@ -247,8 +245,8 @@ final List<Hospital> hospitales = [
       'Quemados',
       'Trauma',
     ],
-    latitud: -12.0435,
-    longitud: -76.9950,
+    latitud: -12.040003429218833, 
+    longitud: -76.99320402203892,
   ),
 
   Hospital(
@@ -257,8 +255,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Quemados',
     ],
-    latitud: -12.0740,
-    longitud: -77.0530,
+    latitud: -12.085697524201946, 
+    longitud: -77.05423307601862,
   ),
 
   Hospital(
@@ -267,8 +265,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Quemados',
     ],
-    latitud: -12.2142,
-    longitud: -76.9432,
+    latitud: -12.232873057389625, 
+    longitud: -76.93441805088297,
   ),
 
   Hospital(
@@ -277,8 +275,8 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Obstetrico',
     ],
-    latitud: -12.0478,
-    longitud: -77.0292,
+    latitud: -12.052558753400378, 
+    longitud: -77.0221670066925, 
   ),
 
   Hospital(
@@ -288,8 +286,8 @@ final List<Hospital> hospitales = [
       'Obstetrico',
       'Pediatrico',
     ],
-    latitud: -12.0537,
-    longitud: -77.0420,
+    latitud: -12.049541158594955, 
+    longitud: -77.04206212207146,
   ),
 
   Hospital(
@@ -298,7 +296,7 @@ final List<Hospital> hospitales = [
     especialidades: [
       'Pediatrico',
     ],
-    latitud: -12.0566,
-    longitud: -77.0507,
+    latitud: -12.064999626416945,
+    longitud:  -77.04611590926145
   ),
 ];
