@@ -280,4 +280,59 @@ Clinica(
   longitud: -77.01058616620679,
 ),
 
+Clinica(
+    nombre: 'Hospital Nacional Arzobispo Loayza',
+    seguro: ["AFOCAT"],
+    direccion: 'Av. Alfonso Ugarte 848, Cercado de Lima',
+    latitud: -12.049537466144958, 
+    longitud: -77.04269480671542,
+  ),
+
+  Clinica(
+    nombre: 'Hospital Nacional Dos de Mayo',
+    seguro: ["AFOCAT"],
+    direccion: 'Av. Grau 130, Cercado de Lima',
+    latitud: -12.056558533033705, 
+    longitud: -77.01603277786828,
+  ),
+
+  Clinica(
+    nombre: 'Hospital Nacional Cayetano Heredia',
+    seguro: ["AFOCAT"],
+    direccion: 'Av. Honorio Delgado 262, San Martín de Porres',
+    latitud: -12.022110016650828, 
+    longitud: -77.05571140856698,
+  ),
+
+  Clinica(
+    nombre: 'Hospital Nacional Hipólito Unanue',
+    seguro: ["AFOCAT"],
+    direccion: 'Av. César Vallejo 1390, El Agustino',
+    latitud: -12.040003429218833, 
+    longitud: -76.99320402203892,
+  ),
+
+  Clinica(
+    nombre: 'Hospital de Emergencias José Casimiro Ulloa',
+    seguro: ["AFOCAT"],
+    direccion: 'Av. República de Panamá 6355, Miraflores',
+    latitud: -12.127982438140942, 
+    longitud: -77.01770500669717,
+  ),
+
+  Clinica(
+    nombre: 'Hospital Nacional Daniel Alcides Carrión',
+    seguro: ["AFOCAT"],
+    direccion: 'Av. Guardia Chalaca 2176, Bellavista, Callao',
+    latitud: -12.062561437031457, 
+    longitud: -77.12358042020195,
+  ),
+
+  Clinica(
+    nombre: 'Hospital Nacional Alberto Sabogal Sologuren',
+    seguro: ["AFOCAT"],
+    direccion: 'Jr. Colina 1081, Bellavista, Callao',
+    latitud: -12.06501957129983, 
+    longitud: -77.12206076440793,
+  ),
 ];
